@@ -18,12 +18,13 @@
         var inputText = prompt("請輸入你想反轉的字串 ", " ");
 
         function reverse (str) {
-            var list = str.split('');
-            var result = '';
-            for (let index = list.length -1 ; index >= 0 ; index--) {
-                result += list[index];
+            var list = str.trim().split('');
+            for (let index = 0, max = (list.length - 1)/2  ; index < max ; index++) {
+                let tmp = list[index];
+                list[index] = list[list.length - index - 1];
+                list[list.length - index - 1] = tmp;
             }
-            return result;
+            return list.join('');
         }
 
         alert(reverse(inputText));
