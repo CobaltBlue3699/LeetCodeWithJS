@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        Write a function that takes a string as input and returns the string reversed.
+    </p>
+    <p>
+        Example: Given s = "hello", return "olleh".
+    </p>
+        
+    <script>
+        var inputText = prompt("請輸入你想反轉的字串 ", " ");
+
+        function reverse (str) {
+            var list = str.split('');
+            var result = '';
+            for (let index = list.length -1 ; index >= 0 ; index--) {
+                result += list[index];
+            }
+            return result;
+        }
+
+        alert(reverse(inputText));
+    </script>
+</body>
+</html>
