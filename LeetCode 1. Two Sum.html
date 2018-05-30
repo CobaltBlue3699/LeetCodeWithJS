@@ -19,20 +19,30 @@
         //     }
         // };
 
+        // var twoSum = function (nums, target) {
+        //     let nums2 = nums.slice(0, nums.length),
+        //         start = 0,
+        //         end = nums.length -1;
+        //     nums2.sort(function (a, b) {
+        //         return a - b;
+        //     });
+        //     while (start < end) {
+        //         let sum = nums2[start] + nums2[end];
+        //         if (sum > target)
+        //             end--;
+        //         else if (sum < target)
+        //             start++;
+        //         else return [nums.indexOf(nums2[start]), nums.lastIndexOf(nums2[end])];
+        //     }
+        // };
+
         var twoSum = function (nums, target) {
-            let nums2 = nums.slice(0, nums.length),
-                start = 0,
-                end = nums.length -1;
-            nums2.sort(function (a, b) {
-                return a - b;
-            });
-            while (start < end) {
-                let sum = nums2[start] + nums2[end];
-                if (sum > target)
-                    end--;
-                else if (sum < target)
-                    start++;
-                else return [nums.indexOf(nums2[start]), nums.lastIndexOf(nums2[end])];
+            let map = new Map();
+            for (let i = 0; i < nums.length; i++) {
+                if (map.has(target - nums[i])) {
+                    return [map.get(target - nums[i]), i];
+                }
+                map.set(nums[i], i);
             }
         };
 
