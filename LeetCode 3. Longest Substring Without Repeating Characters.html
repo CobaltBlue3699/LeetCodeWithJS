@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    Given a string, find the length of the longest substring without repeating characters. Examples: Given "abcabcbb", the answer
+    is "abc", which the length is 3. Given "bbbbb", the answer is "b", with the length of 1. Given "pwwkew", the answer is
+    "wke", with the length of 3. Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
+
+    <script>
+        var lengthOfLongestSubstring = function (s) {
+            let list = s.split('');
+            let stack = []; // 用來儲存目前子字串
+            let ans = 0;
+            for (let index = 0; index < list.length; index++) {
+                const element = list[index];
+                const tmp = stack.indexOf(element);
+                if(tmp != -1) { // 如果當前元素與stack元素重複則代表該開始計算下個子字串了
+                    stack.splice(0, tmp + 1);
+                }
+                stack.push(element);
+                ans = ans > stack.length ? ans : stack.length;
+            }
+            return ans;
+        };
+        console.log(lengthOfLongestSubstring("pwwkeew"));
+        console.log(lengthOfLongestSubstring("dedv"));
+        console.log(lengthOfLongestSubstring("abcabcbb"));
+        console.log(lengthOfLongestSubstring("b"));
+    </script>
+</body>
+
+</html>
