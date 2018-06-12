@@ -15,31 +15,46 @@
     <br> nums1 = [1, 2] nums2 = [3, 4] The median is (2 + 3)/2 = 2.5
     <script>
         var findMedianSortedArrays = function (nums1, nums2) {
-            let arr = mergeArr(nums1, nums2);
-            return arr.length % 2 == 1 ? arr[parseInt((arr.length - 1) /2)] : (arr[parseInt(arr.length /2)] + arr[parseInt(arr.length /2) -1])/2;
-        };
-        
-        function mergeArr(arr1, arr2) {
-            let rtn = [];
-            while(arr1.length > 0 && arr2.length > 0) {
-                if(arr1[0] >= arr2[0]) {
-                    let item = arr2.splice(0,1)[0];
-                    rtn.push(item); 
-                } else {
-                    let item = arr1.splice(0,1)[0];
-                    rtn.push(item); 
+            if(nums1.length > nums2.length) {
+                return findMedianSortedArrays(nums2, nums1);
+            }
+            let lenA = nums1.length;
+            let lenB = nums2.length;
+            let imin = 0, imax = lenA, halfLen = parseInt((lenA + lenB + 1)/2);
+            if(lenA == 0) 
+                return lenB % 2 == 1 ? nums2[parseInt((lenB-1) / 2)] : (nums2[parseInt(lenB / 2)] + nums2[parseInt((lenB-1) / 2)])/2; 
+            
+            while(imin <= imax) {
+                let i = parseInt((imin + imax)/2), j = halfLen - i;
+                if(i < lenA && nums2[j-1] > nums1[i])
+                    imin = i+1;
+                else if(i>0 && nums1[i-1] > nums2[j])
+                    imax = i-1;
+                else {
+                    let maxOfLeft;
+                    let minOfRight;
+                    if(i == 0) 
+                        maxOfLeft = nums2[j-1];
+                    else if(j==0)
+                        maxOfLeft = nums1[i-1];
+                    else maxOfLeft = Math.max(nums1[i-1], nums2[j-1]);
+
+                    if ((lenA + lenB) % 2 == 1)
+                        return maxOfLeft;
+                    
+                    if(i == lenA)
+                        minOfRight = nums2[j];
+                    else if(j == lenB)
+                        minOfRight = nums1[i];
+                    else minOfRight = Math.min(nums1[i], nums2[j]);
+
+                    return (maxOfLeft + minOfRight) / 2.0
                 }
             }
-            if(arr1.length > 0) {
-                rtn = rtn.concat(arr1);
-            } else {
-                rtn = rtn.concat(arr2);
-            }
-            return rtn;
-        }
-
-        console.log(mergeArr([1,2], [3,5,7]));
+        };
         console.log(findMedianSortedArrays([1,2,4], [3,5,7]));
+        console.log(findMedianSortedArrays([1,2,3], []));
+        console.log(findMedianSortedArrays([4], [1,2,3,5,6]));
     </script>
 </body>
 
