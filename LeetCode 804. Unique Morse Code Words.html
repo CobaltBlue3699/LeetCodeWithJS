@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    International Morse Code defines a standard encoding <br> 
+    where each letter is mapped to a series of dots and dashes, <br>
+    as follows: "a" maps to ".-", "b" maps to "-...", "c" maps to "-.-.", and so on.<br>
+    [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+    <br>
+    Now, given a list of words, each word can be written as a concatenation of the Morse code of each letter. 
+    <br>For example, "cab" can be written as "-.-.-....-", 
+    <br>(which is the concatenation "-.-." + "-..." + ".-"). 
+    <br>We'll call such a concatenation, the transformation of a word.
+
+    <br>Return the number of different transformations among all words we have.
+    
+    <script>
+        // a => 97, z => 122
+        var uniqueMorseRepresentations = function(words) {
+            let result = new Set();
+            for(let i=0; i<words.length; i++) {
+                result.add(decode(words[i]))
+            }
+            return result.size;
+        };
+        function decode(word) {
+            const CODES = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."];
+            let tmp = word.split('');
+            let rtn = '';
+            for(let i=0;i<tmp.length;i++) {
+                rtn += CODES[tmp[i].charCodeAt() - 97];
+            }
+            return rtn;
+        }
+    </script>
+</body>
+</html>
