@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
+
+    <br> Given two integers x and y, calculate the Hamming distance.
+    <br>Input: x = 1, y = 4
+    <br>Output: 2
+    <br>Explanation:
+    <br>1 (0 0 0 1) 4
+    <br> (0 1 0 0) ↑ ↑
+    <script>
+        /**
+         * @param {number} x
+         * @param {number} y
+         * @return {number}
+         */
+        var hammingDistance = function (x, y) {
+            
+            let xString = x.toString(2);
+            let yString = y.toString(2);
+            if(xString.length > yString.length) {
+                let tmp = (0).toString().repeat(xString.length - yString.length);
+                yString = tmp.concat(yString);
+            } else if(xString.length < yString.length) {
+                let tmp = (0).toString().repeat(yString.length - xString.length);
+                xString = tmp.concat(xString);
+            }
+            debugger
+            let rtn = 0;
+            for(let i=0;i<xString.length;i++) {
+                if(xString.charAt(i) != yString.charAt(i))
+                    rtn++;
+            }
+            return rtn;
+        };
+        console.log(hammingDistance(new Number(1), new Number(4)));
+    </script>
+</body>
+
+</html>
