@@ -24,25 +24,14 @@
          * @return {number}
          */
         var hammingDistance = function (x, y) {
-            
-            let xString = x.toString(2);
-            let yString = y.toString(2);
-            if(xString.length > yString.length) {
-                let tmp = (0).toString().repeat(xString.length - yString.length);
-                yString = tmp.concat(yString);
-            } else if(xString.length < yString.length) {
-                let tmp = (0).toString().repeat(yString.length - xString.length);
-                xString = tmp.concat(xString);
-            }
-            debugger
-            let rtn = 0;
-            for(let i=0;i<xString.length;i++) {
-                if(xString.charAt(i) != yString.charAt(i))
-                    rtn++;
-            }
-            return rtn;
+            // 互斥或，不相同為1 -> 這裡1指需要改變的num
+            let val = x ^ y;
+            let valString = new Number(val).toString(2);
+            return valString.split('').filter(function(c) {
+                return c == '1';
+            }).length;
         };
-        console.log(hammingDistance(new Number(1), new Number(4)));
+        console.log(hammingDistance(new Number(60), new Number(13)));
     </script>
 </body>
 
