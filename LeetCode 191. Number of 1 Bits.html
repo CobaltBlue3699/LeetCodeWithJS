@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    Write a function that takes an unsigned integer and returns the number of '1' bits it has (also known as the Hamming weight).
+    <br> Input: 11
+    <br> Output: 3
+    <br> Explanation: Integer 11 has binary representation 00000000000000000000000000001011
+    <script>
+        var hammingWeight = function (n) {
+            return n.toString(2).split('').filter(function (c) {
+                return c == '1';
+            }).length;
+        };
+        console.log(hammingWeight(new Number(1)));
+    </script>
+</body>
+
+</html>
